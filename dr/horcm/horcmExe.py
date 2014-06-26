@@ -40,7 +40,7 @@ class HorcmExe:
     def horcmsaneind(self, group):
         """
         method to check individual groups
-        :param group:
+        :param group: this is the group name
         :return:
         """
         groupid = group
@@ -54,7 +54,7 @@ class HorcmExe:
     def horcmsplitind(self, group):
         """
         Method to split an individual group for testing of DR
-        :param group:
+        :param group: this is the group name
         :return:
         """
         groupid = group
@@ -104,7 +104,7 @@ class HorcmExe:
                 if returncode == 0:
                     print "the disks were split\n"
                 elif returncode == 1:
-                    print "an error has occured in group "+groupid
+                    print "an error has occured in group "+groupid+"\n"
             return 0
         if self.currentmode == 1:
             group = self.currentcol.collectgroups(self.currentcol.whichhorcm.getter)
@@ -114,7 +114,7 @@ class HorcmExe:
                 print "this will now take over the disks from the primary site to here\n"
                 for groupid in group:
                     returncode = subprocess.call("/usr/bin/hormtakeover -ITC"+self.currentcol.whichhorcm.getter+" -g"
-                                                     + groupid)
+                                                 + groupid)
                     if returncode == 0:
                         print "disk taken over\n"
                     elif returncode == 1:
