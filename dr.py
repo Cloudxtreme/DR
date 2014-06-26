@@ -34,6 +34,7 @@ while menuinput != 4:
                 indisel = raw_input("Would you like to only test one group?[Y/N]")
                 if (indisel == "Y") or (indisel == "y"):
                     group = horcm.selectgroup()
+                    horcmexe.horcmsplitind(group)
                 if (indisel == "n") or (indisel == "N"):
                     fulltest = raw_input("Would you like to test full DR?[Y/N")
                     if (fulltest == "y") or (fulltest == "Y"):
