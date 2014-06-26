@@ -6,7 +6,8 @@ import subprocess
 
 class HorcmExe:
 
-    def __init__(self, horcmnode, horcmcol):
+    def __init__(self, horcmnode, horcmcol, group):
+        self.groupexe = group
         self.currentmode = horcmnode
         self.currentcol = horcmcol
         self.currentgroups = self.currentcol.collectgroups(self.currentcol.whichhorcm.getter)
@@ -33,10 +34,8 @@ class HorcmExe:
         else:
             return False
 
-    def horcmsplit(self):
-        if self.currentmode == 0:
-            print "disks will be split and set RW"
+    def horcmsplitind(self, group):
+        if (self.currentmode == 0) and (self.groupexe == 0):
+            print "disks will be split and set RW for the group "+group
 
-        if self.currentmode == 1:
-            print "Warning this will take over Primary Vols to Secondy site"
 
