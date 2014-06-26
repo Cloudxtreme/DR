@@ -58,4 +58,3 @@ class HorcmCol:
             print str(count)+") "+group+"\n"
         selection = raw_input("\n please select a group [0-"+str(count)+"] :")
         return selection
-
