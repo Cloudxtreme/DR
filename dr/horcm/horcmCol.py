@@ -9,7 +9,7 @@ class Horcm:
         Object constructor for the horcm collection class
         :param horcmfile:
         """
-        self._x = horcmfile
+        self._whichhorcm = horcmfile
 
     @property
     def whichhorcm(self):
@@ -17,7 +17,7 @@ class Horcm:
         getter for the horcmfile attribute
         :return:
         """
-        return self._x
+        return self._whichhorcm
 
     @whichhorcm.setter
     def whichhorcm(self, value):
@@ -25,7 +25,7 @@ class Horcm:
         setter for the horcm file number
         :param value:
         """
-        self._x = value
+        self._whichhorcm = value
 
     def collectgroups(self):
         """
