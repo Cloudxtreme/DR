@@ -27,7 +27,8 @@ class HorcmExe:
             return False
 
     def horcmsaneind(self, group):
-        returncode = subprocess.call("/usr/bin/pairdisplay -ITC"+self.currentcol.whichhorcm.getter+"-g"+group+" -l \
+        groupid = group
+        returncode = subprocess.call("/usr/bin/pairdisplay -ITC"+self.currentcol.whichhorcm.getter+" -g "+groupid+" -l \
         | awk '{print $8}' | grep -i pair", shell=True)
         if returncode == 0:
             return True
@@ -35,7 +36,17 @@ class HorcmExe:
             return False
 
     def horcmsplitind(self, group):
+        groupid = group
         if (self.currentmode == 0) and (self.groupexe == 0):
             print "disks will be split and set RW for the group "+group
-
-
+            if self.horcmsaneind(groupid) == True:
+                print "The group"+groupid+"is in the correct state\n"
+                print "the disks will now be split"
+                returncode = subprocess.call("/usr/bin/pairsplit -ITC"+self.currentcol.whichhorcm.getter+" -g "+groupid+\
+                    " -rw")
+                if returncode == 0:
+                    print "the disks were split"
+                    return 0
+                elif returncode == 1:
+                    print "an error has occured"
+                    return 1
