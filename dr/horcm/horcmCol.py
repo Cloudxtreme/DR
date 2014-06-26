@@ -52,6 +52,11 @@ class HorcmCol:
         return filearray
 
     def selectgroup(self):
+        """
+        Method to select an individual group from a horcm file
+
+        :return:
+        """
         groups = self.collectgroups(self.whichhorcm.getter)
         count = 0
         for group in groups:
