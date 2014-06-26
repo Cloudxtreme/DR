@@ -59,7 +59,7 @@ class HorcmExe:
         """
         groupid = group
         if self.currentmode == 0:
-            print "disks will be split and set RW for the group "+group
+            print "disks will be split and set RW for the group "+group+"\n"
             if self.horcmsaneind(groupid) is True:
                 print "The group "+groupid+" is in the correct state\n"
                 print "the disks will now be split"
@@ -73,6 +73,22 @@ class HorcmExe:
                     return 1
             elif self.horcmsaneind(groupid) is False:
                 print "The group "+groupid+" is in the wrong state"
+        if self.currentmode == 1:
+            print "this will takeover the disks from the primary site for "+group + "\n"
+            selection = raw_input("Are you sure?[ Y/N]:")
+            if (selection == "Y") or (selection == "y"):
+                print "taking over disk"+group
+                returncode = subprocess.call("/usr/bin/horcmtakeover -ITC"+self.currentcol.whichhorcm.getter+ "-g"+
+                                             group)
+                if returncode == 0:
+                    print "disks takenover for "+group
+                    return 0
+                elif returncode == 1:
+                    print "failure to take"
+                    return 1
+            if (selection == "n") or (selection == "N"):
+                print "returning"
+                return 2
 
     def horcmsplit(self):
         """
@@ -93,12 +109,12 @@ class HorcmExe:
         if self.currentmode == 1:
             group = self.currentcol.collectgroups(self.currentcol.whichhorcm.getter)
             selection = raw_input("This will takeover all volumes in the horcm "+self.currentcol.whichhorcm.getter +
-                                  " are you sure Y/N:")
+                                  " are you sure? [Y/N]:")
             if (selection == "Y") or (selection == "y"):
                 print "this will now take over the disks from the primary site to here\n"
                 for groupid in group:
                     returncode = subprocess.call("/usr/bin/hormtakeover -ITC"+self.currentcol.whichhorcm.getter+" -g"
-                                             +groupid)
+                                                     + groupid)
                     if returncode == 0:
                         print "disk taken over\n"
                     elif returncode == 1:
@@ -106,6 +122,4 @@ class HorcmExe:
                 return 0
             if (selection == "n") or (selection == "N"):
                 print "returning\n"
-                return 1
-
-
+                return 2
