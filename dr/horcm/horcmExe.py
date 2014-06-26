@@ -28,8 +28,8 @@ class HorcmExe:
         """
         groupsane = []
         for group in self.currentgroups:
-            returncode = subprocess.call("/usr/bin/pairdisplay -ITC"+self.currentcol.whichhorcm.getter+"-g"+group+" -l \
-            | awk '{print $8}' | grep -i pair", shell=True)
+            returncode = subprocess.call("/usr/bin/pairdisplay -ITC" + self.currentcol.whichhorcm.getter+"-g" + group +
+                                         " -l | awk '{print $8}' | grep -i pair", shell=True)
             if returncode == 0:
                 groupsane.append(group)
         if len(self.currentgroups) == len(groupsane):
@@ -44,8 +44,8 @@ class HorcmExe:
         :return:
         """
         groupid = group
-        returncode = subprocess.call("/usr/bin/pairdisplay -ITC"+self.currentcol.whichhorcm.getter+" -g "+groupid+" -l \
-        | awk '{print $8}' | grep -i pair", shell=True)
+        returncode = subprocess.call("/usr/bin/pairdisplay -ITC" + self.currentcol.whichhorcm.getter + " -g " + groupid
+                                     + " -l | awk '{print $8}' | grep -i pair", shell=True)
         if returncode == 0:
             return True
         else:
@@ -64,7 +64,7 @@ class HorcmExe:
                 print "The group "+groupid+" is in the correct state\n"
                 print "the disks will now be split"
                 returncode = subprocess.call("/usr/bin/pairsplit -ITC"+self.currentcol.whichhorcm.getter+" -g "+groupid
-                                             + " -rw")
+                                             + " -rw", shell=True)
                 if returncode == 0:
                     print "the disks were split"
                     return 0
@@ -78,8 +78,8 @@ class HorcmExe:
             selection = raw_input("Are you sure?[ Y/N]:")
             if (selection == "Y") or (selection == "y"):
                 print "taking over disk"+group
-                returncode = subprocess.call("/usr/bin/horcmtakeover -ITC"+self.currentcol.whichhorcm.getter+ "-g"+
-                                             group)
+                returncode = subprocess.call("/usr/bin/horcmtakeover -ITC" + self.currentcol.whichhorcm.getter + "-g" +
+                                             group, shell=True)
                 if returncode == 0:
                     print "disks takenover for "+group
                     return 0
@@ -100,7 +100,7 @@ class HorcmExe:
             for groupid in group:
                 print "splitting the disks for "+group+" now\n"
                 returncode = subprocess.call("/usr/bin/pairsplit -ITC"+self.currentcol.whichhorcm.getter+" -g "+groupid
-                                             + " -rw")
+                                             + " -rw", shell=True)
                 if returncode == 0:
                     print "the disks were split\n"
                 elif returncode == 1:
@@ -114,7 +114,7 @@ class HorcmExe:
                 print "this will now take over the disks from the primary site to here\n"
                 for groupid in group:
                     returncode = subprocess.call("/usr/bin/hormtakeover -ITC"+self.currentcol.whichhorcm.getter+" -g"
-                                                 + groupid)
+                                                 + groupid, shell=True)
                     if returncode == 0:
                         print "disk taken over\n"
                     elif returncode == 1:

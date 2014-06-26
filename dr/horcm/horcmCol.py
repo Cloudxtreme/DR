@@ -39,8 +39,8 @@ class HorcmCol:
         """
         if horcm != self.whichhorcm.getter:
             print "this should be equal to the original horcm file"
-        print "Collecting Horcm information for file /etc/horcm"+self.whichhorcm+".conf\n"
-        filename = "/etc/horcm"+self.whichhorcm+".conf"
+        print "Collecting Horcm information for file /etc/horcm" + self.whichhorcm + ".conf\n"
+        filename = "/etc/horcm" + self.whichhorcm + ".conf"
         horcmin = open(filename, 'r')
         filearray = []
         for line in horcmin:
@@ -62,5 +62,5 @@ class HorcmCol:
         for group in groups:
             print str(count)+") "+group+"\n"
             count = ++count
-        selection = raw_input("\n please select a group [0-"+str(count)+"] :")
+        selection = raw_input("\n please select a group [0-" + str(count) + "] :")
         return groups[selection]
