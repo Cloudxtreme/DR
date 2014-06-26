@@ -37,7 +37,7 @@ class HorcmCol:
         horcm files for group identification
         :return:
         """
-        if horcm != HorcmCol.whichhorcm.getter:
+        if horcm != self.whichhorcm.getter:
             print "this should be equal to the original horcm file"
         print "Collecting Horcm information for file /etc/horcm"+self.whichhorcm+".conf\n"
         filename = "/etc/horcm"+self.whichhorcm+".conf"
@@ -50,3 +50,12 @@ class HorcmCol:
                 filearray.append(newliney)
         filearray = list(set(filearray))
         return filearray
+
+    def selectgroup(self):
+        groups = self.collectgroups(self.whichhorcm.getter)
+        count = 0
+        for group in groups:
+            print str(count)+") "+group+"\n"
+        selection = raw_input("\n please select a group [0-"+str(count)+"] :")
+        return selection
+
