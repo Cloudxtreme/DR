@@ -2,7 +2,7 @@
 __author__ = 'Jonathan Stoker'
 
 
-class Horcm:
+class HorcmCol:
 
     def __init__(self, horcmfile):
         """
@@ -27,12 +27,18 @@ class Horcm:
         """
         self._whichhorcm = value
 
-    def collectgroups(self):
+    @whichhorcm.getter
+    def whichhorcm(self):
+        return self._whichhorcm
+
+    def collectgroups(self, horcm):
         """
         Method to collect the data out of the
         horcm files for group identification
         :return:
         """
+        if horcm != HorcmCol.whichhorcm.getter:
+            print "this should be equal to the original horcm file"
         print "Collecting Horcm information for file /etc/horcm"+self.whichhorcm+".conf\n"
         filename = "/etc/horcm"+self.whichhorcm+".conf"
         horcmin = open(filename, 'r')
