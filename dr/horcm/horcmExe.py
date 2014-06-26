@@ -40,7 +40,7 @@ class HorcmExe:
         if (self.currentmode == 0) and (self.groupexe == 0):
             print "disks will be split and set RW for the group "+group
             if self.horcmsaneind(groupid) is True:
-                print "The group"+groupid+"is in the correct state\n"
+                print "The group "+groupid+" is in the correct state\n"
                 print "the disks will now be split"
                 returncode = subprocess.call("/usr/bin/pairsplit -ITC"+self.currentcol.whichhorcm.getter+" -g "+groupid
                                              + " -rw")
@@ -50,3 +50,5 @@ class HorcmExe:
                 elif returncode == 1:
                     print "an error has occured"
                     return 1
+            elif self.horcmsaneind(groupid) is False:
+                print "The group "+groupid+" is in the wrong state"
