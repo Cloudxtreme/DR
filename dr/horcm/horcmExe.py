@@ -39,11 +39,11 @@ class HorcmExe:
         groupid = group
         if (self.currentmode == 0) and (self.groupexe == 0):
             print "disks will be split and set RW for the group "+group
-            if self.horcmsaneind(groupid) == True:
+            if self.horcmsaneind(groupid) is True:
                 print "The group"+groupid+"is in the correct state\n"
                 print "the disks will now be split"
-                returncode = subprocess.call("/usr/bin/pairsplit -ITC"+self.currentcol.whichhorcm.getter+" -g "+groupid+\
-                    " -rw")
+                returncode = subprocess.call("/usr/bin/pairsplit -ITC"+self.currentcol.whichhorcm.getter+" -g "+groupid
+                                             + " -rw")
                 if returncode == 0:
                     print "the disks were split"
                     return 0
